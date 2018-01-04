@@ -1,0 +1,9 @@
+/Users/raulpopovici/RiderProjects/IaPSO/IaPSO/bin/Debug/IaPSO.exe
+/Users/raulpopovici/RiderProjects/IaPSO/IaPSO/bin/Debug/IaPSO.pdb
+/Users/raulpopovici/RiderProjects/IaPSO/IaPSO/bin/Debug/PSO.dll
+/Users/raulpopovici/RiderProjects/IaPSO/IaPSO/bin/Debug/PSO.pdb
+/Users/raulpopovici/RiderProjects/IaPSO/IaPSO/obj/Debug/IaPSO.csprojResolveAssemblyReference.cache
+/Users/raulpopovici/RiderProjects/IaPSO/IaPSO/obj/Debug/IaPSO.csproj.CoreCompileInputs.cache
+/Users/raulpopovici/RiderProjects/IaPSO/IaPSO/obj/Debug/IaPSO.exe
+/Users/raulpopovici/RiderProjects/IaPSO/IaPSO/obj/Debug/IaPSO.pdb
+/Users/raulpopovici/RiderProjects/IaPSO/IaPSO/bin/Debug/IaPSO.exe.manifest

@@ -1,0 +1,6 @@
+/Users/raulpopovici/RiderProjects/IaPSO/PSO/bin/Debug/PSO.dll
+/Users/raulpopovici/RiderProjects/IaPSO/PSO/bin/Debug/PSO.pdb
+/Users/raulpopovici/RiderProjects/IaPSO/PSO/obj/Debug/PSO.csprojResolveAssemblyReference.cache
+/Users/raulpopovici/RiderProjects/IaPSO/PSO/obj/Debug/PSO.csproj.CoreCompileInputs.cache
+/Users/raulpopovici/RiderProjects/IaPSO/PSO/obj/Debug/PSO.dll
+/Users/raulpopovici/RiderProjects/IaPSO/PSO/obj/Debug/PSO.pdb
