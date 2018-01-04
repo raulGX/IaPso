@@ -4,3 +4,8 @@
 /Users/raulpopovici/RiderProjects/IaPSO/PSO/obj/Debug/PSO.csproj.CoreCompileInputs.cache
 /Users/raulpopovici/RiderProjects/IaPSO/PSO/obj/Debug/PSO.dll
 /Users/raulpopovici/RiderProjects/IaPSO/PSO/obj/Debug/PSO.pdb
+F:\Anul 4\IA\Proiect\PSO\bin\Debug\PSO.dll
+F:\Anul 4\IA\Proiect\PSO\bin\Debug\PSO.pdb
+F:\Anul 4\IA\Proiect\PSO\obj\Debug\PSO.csprojResolveAssemblyReference.cache
+F:\Anul 4\IA\Proiect\PSO\obj\Debug\PSO.dll
+F:\Anul 4\IA\Proiect\PSO\obj\Debug\PSO.pdb

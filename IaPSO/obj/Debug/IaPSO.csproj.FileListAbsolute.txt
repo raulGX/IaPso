@@ -7,3 +7,10 @@
 /Users/raulpopovici/RiderProjects/IaPSO/IaPSO/obj/Debug/IaPSO.exe
 /Users/raulpopovici/RiderProjects/IaPSO/IaPSO/obj/Debug/IaPSO.pdb
 /Users/raulpopovici/RiderProjects/IaPSO/IaPSO/bin/Debug/IaPSO.exe.manifest
+F:\Anul 4\IA\Proiect\IaPSO\obj\Debug\IaPSO.exe
+F:\Anul 4\IA\Proiect\IaPSO\obj\Debug\IaPSO.pdb
+F:\Anul 4\IA\Proiect\IaPSO\bin\Debug\IaPSO.exe
+F:\Anul 4\IA\Proiect\IaPSO\bin\Debug\IaPSO.pdb
+F:\Anul 4\IA\Proiect\IaPSO\bin\Debug\PSO.dll
+F:\Anul 4\IA\Proiect\IaPSO\bin\Debug\PSO.pdb
+F:\Anul 4\IA\Proiect\IaPSO\obj\Debug\IaPSO.csprojResolveAssemblyReference.cache
