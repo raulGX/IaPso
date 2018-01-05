@@ -16,10 +16,8 @@ namespace PSO
             {
                 var xi = x[i];
                 sum += Math.Pow(xi, 2);
-                //Console.WriteLine(x[i] + " " + i + " " + "ProdG: " + Math.Cos(xi / Math.Sqrt(i)));
-                prod *= Math.Cos(xi / Math.Sqrt(i));
+                prod *= Math.Cos(xi / Math.Sqrt(i+1));
             }
-            //Console.WriteLine("SumG: " + sum);
             return 1 + (1 / 4000) * sum - prod;
         }
     }

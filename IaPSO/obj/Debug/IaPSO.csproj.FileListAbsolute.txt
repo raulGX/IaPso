@@ -14,3 +14,10 @@ F:\Anul 4\IA\Proiect\IaPSO\bin\Debug\IaPSO.pdb
 F:\Anul 4\IA\Proiect\IaPSO\bin\Debug\PSO.dll
 F:\Anul 4\IA\Proiect\IaPSO\bin\Debug\PSO.pdb
 F:\Anul 4\IA\Proiect\IaPSO\obj\Debug\IaPSO.csprojResolveAssemblyReference.cache
+C:\Users\MSI\Source\Repos\IaPso\IaPSO\obj\Debug\IaPSO.exe
+C:\Users\MSI\Source\Repos\IaPso\IaPSO\obj\Debug\IaPSO.pdb
+C:\Users\MSI\Source\Repos\IaPso\IaPSO\bin\Debug\IaPSO.exe
+C:\Users\MSI\Source\Repos\IaPso\IaPSO\bin\Debug\IaPSO.pdb
+C:\Users\MSI\Source\Repos\IaPso\IaPSO\bin\Debug\PSO.dll
+C:\Users\MSI\Source\Repos\IaPso\IaPSO\bin\Debug\PSO.pdb
+C:\Users\MSI\Source\Repos\IaPso\IaPSO\obj\Debug\IaPSO.csprojResolveAssemblyReference.cache
