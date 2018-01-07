@@ -14,3 +14,8 @@ C:\Users\MSI\Source\Repos\IaPso\PSO\bin\Debug\PSO.pdb
 C:\Users\MSI\Source\Repos\IaPso\PSO\obj\Debug\PSO.csprojResolveAssemblyReference.cache
 C:\Users\MSI\Source\Repos\IaPso\PSO\obj\Debug\PSO.dll
 C:\Users\MSI\Source\Repos\IaPso\PSO\obj\Debug\PSO.pdb
+F:\Anul 4\IA\ProiectFinal\PSO\bin\Debug\PSO.dll
+F:\Anul 4\IA\ProiectFinal\PSO\bin\Debug\PSO.pdb
+F:\Anul 4\IA\ProiectFinal\PSO\obj\Debug\PSO.csprojResolveAssemblyReference.cache
+F:\Anul 4\IA\ProiectFinal\PSO\obj\Debug\PSO.dll
+F:\Anul 4\IA\ProiectFinal\PSO\obj\Debug\PSO.pdb

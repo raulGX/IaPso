@@ -35,6 +35,16 @@ namespace PSOInterface
             textBoxList.Add(textBox8);
             textBoxList.Add(textBox9);
 
+            textBox1.Text = "0.729";
+            textBox2.Text = "1.49445";
+            textBox3.Text = "1.49445";
+            textBox4.Text = "3";
+            textBox5.Text = "-5";
+            textBox6.Text = "5";
+            textBox7.Text = "1000";
+            textBox8.Text = "50";
+            textBox9.Text = "1";
+
             paramList.Add(param.W);
             paramList.Add(param.C1);
             paramList.Add(param.C2);
