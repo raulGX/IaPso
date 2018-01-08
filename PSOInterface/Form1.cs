@@ -1,269 +1,98 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Threading;
-using PSO;
 
-namespace PSOInterface
+namespace PSO
 {
-    public partial class Form1 : Form
+    public interface IProblema
     {
-        List<TextBox> textBoxList = new List<TextBox>();
-        List<Double> paramList = new List<Double>();
-        Parametrii param = new Parametrii();
-        ProblemaDeBaza p;
-        Boolean validInput = false;
-        public Form1()
+        double Functie(double[] x);
+
+        Particula Rezolva(Parametrii param);
+        
+    }
+
+    public class ProblemaDeBaza : IProblema
+    {
+        public virtual double Functie(double[] x)
         {
-            InitializeComponent();
-
-            Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
-
-            textBoxList.Add(textBox1);
-            textBoxList.Add(textBox2);
-            textBoxList.Add(textBox3);
-            textBoxList.Add(textBox4);
-            textBoxList.Add(textBox5);
-            textBoxList.Add(textBox6);
-            textBoxList.Add(textBox7);
-            textBoxList.Add(textBox8);
-            textBoxList.Add(textBox9);
-
-            textBox1.Text = "0.729";
-            textBox2.Text = "1.49445";
-            textBox3.Text = "1.49445";
-            textBox4.Text = "3";
-            textBox5.Text = "-5";
-            textBox6.Text = "5";
-            textBox7.Text = "1000";
-            textBox8.Text = "50";
-            textBox9.Text = "1";
-
-            paramList.Add(param.W);
-            paramList.Add(param.C1);
-            paramList.Add(param.C2);
-            paramList.Add(param.DimensiuneProblema);
-            paramList.Add(param.Min);
-            paramList.Add(param.Max);
-            paramList.Add(param.NumarIteratii);
-            paramList.Add(param.NumarParticule);
-            paramList.Add(param.VitezaMaxima);
-
+            return 2;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public Particula Rezolva(Parametrii param)
         {
-            if(comboBox1.SelectedItem == null)
+            var rand = new Random();
+            var roi = new Particula[param.NumarParticule];
+
+            for (var i = 0; i < roi.Length; i++)
             {
-                MessageBox.Show("Selectati o functie !");
-                return;
-            }
-            switch (comboBox1.SelectedItem.ToString())
+                roi[i] = new Particula();
+
+                var pozitie = new double[param.DimensiuneProblema];
+                var viteza = new double[param.DimensiuneProblema]; //initialize with 0
+
+                for (var j = 0; j < pozitie.Length; j++)
+                    pozitie[j] = (param.Max - param.Min) * rand.NextDouble() + param.Min;
+                // viteza[j] = rand.NextDouble();
+                roi[i].OptimPersonal = new Particula();
+                roi[i].OptimPersonal.Pozitie = new double[param.DimensiuneProblema];
+                pozitie.CopyTo(roi[i].OptimPersonal.Pozitie, 0);
+                roi[i].Pozitie = pozitie;
+                roi[i].Viteza = viteza;
+                roi[i].OptimPersonal.Cost = roi[i].Cost = Functie(roi[i].Pozitie);
+            } //sfarsit initializare
+
+            var aux = roi.OrderBy(part => part.Cost).First();
+            var optimSocial = new Particula();
+            optimSocial.Pozitie = new double[param.DimensiuneProblema];
+            aux.Pozitie.CopyTo(optimSocial.Pozitie, 0);
+            optimSocial.Cost = aux.Cost;
+            for (var i = 0; i < param.NumarIteratii; i++)
+            for (var k = 0; k < roi.Length; k++)
             {
-                case "Ackley":
-                    for(var i = 0; i < textBoxList.Count; ++i)
-                    {
-                        validInput = true;
-                        if (textBoxList[i].Text.Length == 0)
-                        {
-                            MessageBox.Show("Introduceti valori valide !");
-                            validInput = false;
-                            break;
-                        }
-                    }
+                var particula = roi[k];
+                var r1 = rand.NextDouble();
+                var r2 = rand.NextDouble();
 
-                    if(validInput == true)
-                    {
-                        double doubleValue;
-                        var param = new Parametrii();
-                        for(var i = 0; i<textBoxList.Count; ++i)
-                        {
-                            if (Double.TryParse(textBoxList[i].Text, out doubleValue))
-                            {
-                                paramList[i] = doubleValue;
-                            }
-                            else
-                            {
-                                MessageBox.Show(textBoxList[i].Text + " nu este un numar real !");
-                                validInput = false;
-                                break;
-                            }
-                        }
-                        if(validInput == true)
-                        {
-                            p = new Ackley();
-                            param.W = paramList[0];
-                            param.C1 = paramList[1];
-                            param.C2 = paramList[2];
-                            param.DimensiuneProblema = Convert.ToInt32(paramList[3]);
-                            param.Min = paramList[4];
-                            param.Max = paramList[5];
-                            param.NumarIteratii = Convert.ToInt32(paramList[6]);
-                            param.NumarParticule = Convert.ToInt32(paramList[7]);
-                            param.VitezaMaxima = paramList[8];
-                            var rez = p.Rezolva(param);
-                            richTextBox1.Text = "Cost: " + rez.Cost + '\n';
-                            foreach (var weight in rez.Pozitie)
-                                richTextBox1.Text += weight + "  ";
-                        }
+                for (var j = 0; j < param.DimensiuneProblema; j++)
+                {
+                    particula.Viteza[j] =
+                        param.W * particula.Viteza[j] +
+                        param.C1 * r1 * (particula.OptimPersonal.Pozitie[j] - particula.Pozitie[j]) +
+                        param.C2 * r2 * (optimSocial.Pozitie[j] - particula.Pozitie[j]);
 
-                    }
-                    break;
-                case "Griewank":
-                    for (var i = 0; i < textBoxList.Count; ++i)
-                    {
-                        validInput = true;
-                        if (textBoxList[i].Text.Length == 0)
-                        {
-                            MessageBox.Show("Introduceti valori valide !");
-                            validInput = false;
-                            break;
-                        }
-                    }
+                    if (particula.Viteza[j] > param.VitezaMaxima)
+                        particula.Viteza[j] = param.VitezaMaxima;
+                }
 
-                    if (validInput == true)
-                    {
-                        double doubleValue;
-                        var param = new Parametrii();
-                        for (var i = 0; i < textBoxList.Count; ++i)
-                        {
-                            if (Double.TryParse(textBoxList[i].Text, out doubleValue))
-                            {
-                                paramList[i] = doubleValue;
-                            }
-                            else
-                            {
-                                MessageBox.Show(textBoxList[i].Text + " nu este un numar real !");
-                                validInput = false;
-                                break;
-                            }
-                        }
-                        if (validInput == true)
-                        {
-                            p = new Griewank();
-                            param.W = paramList[0];
-                            param.C1 = paramList[1];
-                            param.C2 = paramList[2];
-                            param.DimensiuneProblema = Convert.ToInt32(paramList[3]);
-                            param.Min = paramList[4];
-                            param.Max = paramList[5];
-                            param.NumarIteratii = Convert.ToInt32(paramList[6]);
-                            param.NumarParticule = Convert.ToInt32(paramList[7]);
-                            param.VitezaMaxima = paramList[8];
-                            var rez = p.Rezolva(param);
-                            richTextBox1.Text = "Cost: " + rez.Cost + '\n';
-                            foreach (var weight in rez.Pozitie)
-                                richTextBox1.Text += weight + "  ";
-                        }
+                for (var j = 0; j < param.DimensiuneProblema; j++)
+                {
+                    particula.Pozitie[j] += particula.Viteza[j];
 
-                    }
-                    break;
-                case "Rastrigin":
-                    for (var i = 0; i < textBoxList.Count; ++i)
-                    {
-                        validInput = true;
-                        if (textBoxList[i].Text.Length == 0)
-                        {
-                            MessageBox.Show("Introduceti valori valide !");
-                            validInput = false;
-                            break;
-                        }
-                    }
+                    if (particula.Pozitie[j] > param.Max)
+                        particula.Pozitie[j] = param.Max;
 
-                    if (validInput == true)
-                    {
-                        double doubleValue;
-                        var param = new Parametrii();
-                        for (var i = 0; i < textBoxList.Count; ++i)
-                        {
-                            if (Double.TryParse(textBoxList[i].Text, out doubleValue))
-                            {
-                                paramList[i] = doubleValue;
-                            }
-                            else
-                            {
-                                MessageBox.Show(textBoxList[i].Text + " nu este un numar real !");
-                                validInput = false;
-                                break;
-                            }
-                        }
-                        if (validInput == true)
-                        {
-                            p = new Rastrigin();
-                            param.W = paramList[0];
-                            param.C1 = paramList[1];
-                            param.C2 = paramList[2];
-                            param.DimensiuneProblema = Convert.ToInt32(paramList[3]);
-                            param.Min = paramList[4];
-                            param.Max = paramList[5];
-                            param.NumarIteratii = Convert.ToInt32(paramList[6]);
-                            param.NumarParticule = Convert.ToInt32(paramList[7]);
-                            param.VitezaMaxima = paramList[8];
-                            var rez = p.Rezolva(param);
-                            richTextBox1.Text = "Cost: " + rez.Cost + '\n';
-                            foreach (var weight in rez.Pozitie)
-                                richTextBox1.Text += weight + "  ";
-                        }
+                    if (particula.Pozitie[j] < param.Min)
+                        particula.Pozitie[j] = param.Min;
+                }
 
-                    }
-                    break;
-                case "Rosenbrock":
-                    for (var i = 0; i < textBoxList.Count; ++i)
-                    {
-                        validInput = true;
-                        if (textBoxList[i].Text.Length == 0)
-                        {
-                            MessageBox.Show("Introduceti valori valide !");
-                            validInput = false;
-                            break;
-                        }
-                    }
+                particula.Cost = Functie(particula.Pozitie);
 
-                    if (validInput == true)
-                    {
-                        double doubleValue;
-                        var param = new Parametrii();
-                        for (var i = 0; i < textBoxList.Count; ++i)
-                        {
-                            if (Double.TryParse(textBoxList[i].Text, out doubleValue))
-                            {
-                                paramList[i] = doubleValue;
-                            }
-                            else
-                            {
-                                MessageBox.Show(textBoxList[i].Text + " nu este un numar real !");
-                                validInput = false;
-                                break;
-                            }
-                        }
-                        if (validInput == true)
-                        {
-                            p = new Rosenbrock();
-                            param.W = paramList[0];
-                            param.C1 = paramList[1];
-                            param.C2 = paramList[2];
-                            param.DimensiuneProblema = Convert.ToInt32(paramList[3]);
-                            param.Min = paramList[4];
-                            param.Max = paramList[5];
-                            param.NumarIteratii = Convert.ToInt32(paramList[6]);
-                            param.NumarParticule = Convert.ToInt32(paramList[7]);
-                            param.VitezaMaxima = paramList[8];
-                            var rez = p.Rezolva(param);
-                            richTextBox1.Text = "Cost: " + rez.Cost + '\n';
-                            foreach (var weight in rez.Pozitie)
-                                richTextBox1.Text += weight + "  ";
-                        }
+                if (particula.Cost < particula.OptimPersonal.Cost)
+                {
+                    particula.OptimPersonal = new Particula();
+                    particula.OptimPersonal.Pozitie = new double[param.DimensiuneProblema];
+                    particula.Pozitie.CopyTo(particula.OptimPersonal.Pozitie, 0);
+                    particula.OptimPersonal.Cost = Functie(particula.OptimPersonal.Pozitie);
+                }
 
-                    }
-                    break;
+                if (particula.Cost < optimSocial.Cost)
+                {
+                    particula.Pozitie.CopyTo(optimSocial.Pozitie, 0);
+                    optimSocial.Cost = particula.Cost;
+                }
             }
+
+            return optimSocial;
         }
-
     }
 }
